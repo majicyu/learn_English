@@ -1,7 +1,7 @@
 #!/usr/bin/python python3
 
 import os
-
+import pinyin
 class Sentence:
     def __init__(self,num,en,cn):
         self.num = num.strip()
@@ -28,7 +28,7 @@ for sentence in sentences:
     while True:
         print(sentence.en)
         ans = input("Chinese:")
-        if ans == sentence.cn:
+        if ans == sentence.cn or ans == pinyin.get(sentence.cn,format="strip",delimiter=""):
             print("Correct!")
             _ = input(" --- Press enter to continue --- ")
             os.system("clear")
