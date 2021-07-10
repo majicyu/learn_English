@@ -4,7 +4,8 @@ from translate import Translator
 
 fi = open("./words.txt","r")
 fo = open("./words.sep.txt","w")
-
+fo.seek(0)
+fo.truncate()
 translator = Translator(to_lang="zh")
 
 while True:
@@ -32,3 +33,5 @@ while True:
     fo.writelines(en[:-1] + '\n')
     fo.writelines(cn + '\n')
     #fo.writelines(<++> + '\n')
+fi.close()
+fo.close()

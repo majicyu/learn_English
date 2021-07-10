@@ -18,3 +18,7 @@ binding
 customize
 定制
 
+6
+inspection
+检查
+

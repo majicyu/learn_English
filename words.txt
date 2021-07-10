@@ -3,3 +3,4 @@
 3、features:特点
 4、binding:绑定
 5、customize:定制
+6、inspection:检查

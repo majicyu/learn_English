@@ -13,7 +13,7 @@ class Sentence:
 sentences = []
 
 fi = open("./words.sep.txt","r")
-sum = 0
+sum = -1
 
 while True:
     num = fi.readline()
@@ -29,22 +29,37 @@ while True:
 
 print(sentences[0].num)
 
-pdb.set_trace()
+#pdb.set_trace()
 os.system("clear")
-for sentence in sentences:
-    random_number = random.randint(1,sum)
-    while True:
-        print(sentence.en)
-        ans = input("Chinese:")
-        if ans == sentence.cn or ans == pinyin.get(sentence.cn,format="strip",delimiter=""):
-            print("Correct!")
-            _ = input(" --- Press enter to continue --- ")
-            os.system("clear")
-            break
-        else:
-            print("Incorrect!")
-            reveal = input(" ---Press enter to continue, y to reveal the answer ---")
-            if reveal == "y":
-                print(sentence.cn)
-                _ = input(" ---Press enter to continue--- ")
-            os.system("clear")
+#for sentence in sentences:
+#random_number = random.randint(1,sum)
+isError = "false"
+while True:
+    #print(sentence.en)
+    if isError == "false":
+        random_number = random.randint(0,sum)
+    print(sentences[random_number].en)
+    ans = input("Chinese:")
+    #if ans == sentence.cn or ans == pinyin.get(sentence.cn,format="strip",delimiter=""):
+    if ans == sentences[random_number].cn or ans == pinyin.get(sentences[random_number].cn,format="strip",delimiter=""):
+        print("Correct!")
+        isError = "false"
+        #_ = input(" --- Press enter to continue --- ")
+        #os.system("clear")
+        #break
+    else:
+        print("Incorrect!")
+        isError = "true"
+        reveal = input(" ---Press enter to continue, y to reveal the answer ---")
+        if reveal == "y":
+            #print(sentence.cn)
+            print(sentences[random_number].cn)
+            #_ = input(" ---Press enter to continue--- ")
+        #os.system("clear")
+    isContinue = input(" --- Press enter to continue, n to end ---")
+    if isContinue == "n":
+        os.system("clear")
+        break
+    else:
+        os.system("clear")
+        continue
