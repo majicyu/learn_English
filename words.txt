@@ -4,3 +4,5 @@
 4、binding:绑定
 5、customize:定制
 6、inspection:检查
+7、privilege:特权
+8、diagnostic:诊断
