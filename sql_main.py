@@ -8,18 +8,21 @@ connection = pymysql.connect(host='localhost',
                              database='learn_english')
 
 cursor = connection.cursor()
-cursor.execute("DROP TABLE IF EXISTS words")
 
-sql = """CREATE TABLE `words`(
-    `id` int(10) NOT NULL AUTO_INCREMENT,
-    `english` char(20) NOT NULL,
-    `chinese` varchar(20) NOT NULL,
-    `correct` int(10) DEFAULT NULL,
-    `incorrect` int(10) DEFAULT NULL,
-    PRIMARY KEY(`id`)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;"""
-
-
-cursor.execute(sql)
-print("CREATE table successful.")
+sql = """INSERT INTO words(english,chinese,correct,incorrect)
+         VALUES('separate','单独的',0,0)"""
+try:
+    cursor.execute(sql)
+    connection.commit()
+except:
+    connection.rollback()
+sql = """INSERT INTO words(english,chinese,correct,incorrect)
+         VALUES('dotfile','配置文件',0,0)"""
+try:
+    cursor.execute(sql)
+    connection.commit()
+except:
+    connection.rollback()
+print(sql)
+print("YES,Insert Successful.")
 connection.close()
