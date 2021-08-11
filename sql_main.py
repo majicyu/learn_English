@@ -9,20 +9,20 @@ connection = pymysql.connect(host='localhost',
 
 cursor = connection.cursor()
 
-sql = """INSERT INTO words(english,chinese,correct,incorrect)
-         VALUES('separate','单独的',0,0)"""
+sql = "SELECT * FROM words where incorrect> %d" %(-1)
 try:
     cursor.execute(sql)
-    connection.commit()
+    results = cursor.fetchall()
+    for row in results:
+        english = row[1]
+        chinese = row[2]
+        correct = row[3]
+        incorrect = row[4]
+        print("english=%s,chinese=%s,correct=%d,incorrect=%d" %(english,chinese,correct,incorrect))
 except:
-    connection.rollback()
-sql = """INSERT INTO words(english,chinese,correct,incorrect)
-         VALUES('dotfile','配置文件',0,0)"""
-try:
-    cursor.execute(sql)
-    connection.commit()
-except:
-    connection.rollback()
-print(sql)
-print("YES,Insert Successful.")
+    import traceback
+    traceback.print_exc()
+    print("ERROR:unable to fetch data")
+#print(sql)
+print("YES,Select Successful.")
 connection.close()
